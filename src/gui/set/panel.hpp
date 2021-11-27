@@ -81,6 +81,8 @@ public:
  
   virtual void getCardLists(vector<CardListBase*>& out) {}
 
+  // Id for menu/toolbar item
+  UInt tool_window_id;
 protected:
   /// Have any controls been created?
   bool isInitialized() const;

@@ -150,7 +150,9 @@ SetWindow::SetWindow(Window* parent, const SetP& set)
   addPanel(menuWindow, tabBar, new CardsPanel     (this, wxID_ANY), 0, _("window_cards"),      _("cards tab"));
   addPanel(menuWindow, tabBar, new StylePanel     (this, wxID_ANY), 1, _("window_style"),      _("style tab"));
   addPanel(menuWindow, tabBar, new SetInfoPanel   (this, wxID_ANY), 2, _("window_set_info"),   _("set info tab"));
-  addPanel(menuWindow, tabBar, new KeywordsPanel  (this, wxID_ANY), 3, _("window_keywords"),   _("keywords tab"));
+  if (set->game->has_keywords) {
+    addPanel(menuWindow, tabBar, new KeywordsPanel  (this, wxID_ANY), 3, _("window_keywords"),   _("keywords tab"));
+  }
   addPanel(menuWindow, tabBar, new StatsPanel     (this, wxID_ANY), 4, _("window_statistics"), _("stats tab"));
   addPanel(menuWindow, tabBar, new RandomPackPanel(this, wxID_ANY), 5, _("window_random_pack"),_("random pack tab"));
   addPanel(menuWindow, tabBar, new ConsolePanel   (this, wxID_ANY), 6, _("window_console"),    _("console tab"));
@@ -214,8 +216,7 @@ SetWindow::~SetWindow() {
 
 void SetWindow::addPanel(wxMenu* windowMenu, wxToolBar* tabBar, SetWindowPanel* panel, UInt pos, const String& image_name, const String& name) {
   // insert in list
-  if (panels.size() <= pos) panels.resize(pos + 1);
-  panels[pos] = panel;
+  panels.push_back(panel);
   // names
   String menu_name   = tr(LOCALE_CAT_MENU,    name);
   String description = tr(LOCALE_CAT_HELP,    name);
@@ -223,6 +224,7 @@ void SetWindow::addPanel(wxMenu* windowMenu, wxToolBar* tabBar, SetWindowPanel* 
   String tab_help    = tr(LOCALE_CAT_TOOLTIP, name);
   // add to tab bar
   int id = ID_WINDOW_MIN + pos;
+  panel->tool_window_id = id;
   tabBar->AddTool(id, tab_name + _("   "), load_resource_tool_image(image_name), wxNullBitmap, wxITEM_CHECK, tab_help, description);
   tabBar->AddSeparator();
   // add to menu bar
@@ -233,13 +235,17 @@ void SetWindow::addPanel(wxMenu* windowMenu, wxToolBar* tabBar, SetWindowPanel* 
 }
 
 void SetWindow::selectPanel(int id) {
-  SetWindowPanel* toSelect = panels.at(id - ID_WINDOW_MIN);
+  // find which panel to select
+  SetWindowPanel* toSelect = nullptr;
+  for (auto p : panels) {
+    if (p->tool_window_id == id) toSelect = p;
+  }
+  if (!toSelect) return;
   if (current_panel == toSelect) {
     // don't change, but fix tab bar
     wxToolBar* tabBar  = (wxToolBar*)FindWindow(ID_TAB_BAR);
-    int wid = ID_WINDOW_MIN;
     FOR_EACH(p, panels) {
-      tabBar->ToggleTool(wid++, p == current_panel);
+      tabBar->ToggleTool(p->tool_window_id, p == current_panel);
     }
     return;
   }
@@ -251,12 +257,10 @@ void SetWindow::selectPanel(int id) {
   wxSizer*   sizer   = GetSizer();
   wxToolBar* tabBar  = (wxToolBar*)FindWindow(ID_TAB_BAR);
   wxMenuBar* menuBar = GetMenuBar();
-  int wid = ID_WINDOW_MIN;
   FOR_EACH(p, panels) {
-    sizer->Show       (p,   p == current_panel);
-    tabBar->ToggleTool(wid, p == current_panel);
-    menuBar->Check    (wid, p == current_panel);
-    ++wid;
+    sizer->Show       (p, p == current_panel);
+    tabBar->ToggleTool(p->tool_window_id, p == current_panel);
+    menuBar->Check    (p->tool_window_id, p == current_panel);
   }
   // fix sizer stuff
   fixMinWindowSize();
@@ -278,19 +282,14 @@ void toolbar_SetToolNormalBitmap(wxToolBar* toolbar, int id, wxBitmap const& bit
 }
 
 void SetWindow::setPanelIcon(SetWindowPanel* panel, wxBitmap const& icon) {
-  for (size_t i = 0 ; i < panels.size() ; ++i) {
-    if (panels[i] == panel) {
-      wxToolBar* tabBar = (wxToolBar*)FindWindow(ID_TAB_BAR);
-      toolbar_SetToolNormalBitmap(tabBar, ID_WINDOW_MIN+(int)i, icon);
-      #if wxVERSION_NUMBER < 2800
-        // This is needed at least in wx2.6, other versions seem not to need it, but maybe they do
-        Layout();
-      #endif
-      // TODO: this could be done better, wx requires a full new Realize of the toolbar, but on win32 a single message would do
-      // if only we could set up the imagelist correctly.
-      return;
-    }
-  }
+  wxToolBar* tabBar = (wxToolBar*)FindWindow(ID_TAB_BAR);
+  toolbar_SetToolNormalBitmap(tabBar, panel->tool_window_id, icon);
+  #if wxVERSION_NUMBER < 2800
+    // This is needed at least in wx2.6, other versions seem not to need it, but maybe they do
+    Layout();
+  #endif
+  // TODO: this could be done better, wx requires a full new Realize of the toolbar, but on win32 a single message would do
+  // if only we could set up the imagelist correctly.
 }
 
 // ----------------------------------------------------------------------------- : Window managment
