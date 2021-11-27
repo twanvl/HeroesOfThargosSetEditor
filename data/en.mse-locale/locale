@@ -16,8 +16,6 @@ menu:
 	export html:			&HTML...
 	export image:			Card &Image...
 	export images:			All Card I&mages...
-	export apprentice:		&Apprentice...
-	export mws:				Magic &Workstation...
 	check updates:		Check &Updates...
 	print preview:		Print Pre&view...
 	print:				&Print...	Ctrl+P
@@ -94,7 +92,7 @@ menu:
 	help:			&Help
 	index:				&Index...	F1
 	website:			&Website...
-	about:				&About Magic Set Editor...
+	about:				&About Heroes of Thargos card creator...
 	
 	# symbol editor
 	
@@ -119,7 +117,7 @@ menu:
 
 ############################################################## Menu help texts
 help:
-	welcome:			Welcome to Magic Set Editor
+	welcome:			Welcome to the Heroes of Thargos custom card creator
 	
 	#file:
 	new set:			Create a new set
@@ -139,7 +137,7 @@ help:
 	print:				Print cards from this set
 	reload data:		Reload all template files (game and style) as well as the set.
 	show profiler:		Show the profiler window, with timings of (script) functions. Used for optimization.
-	exit:				Quits Magic Set Editor; prompts to save the set
+	exit:				Quits Heroes of Thargos card creator; prompts to save the set
 	
 	#edit:
 	undo:				Undoes the last action
@@ -158,7 +156,7 @@ help:
 	find next:			Find the next match
 	replace:			Replace in the card texts
 	auto replace:		What text should automatically be replaced?
-	preferences:		Change the configuration of Magic Set Editor
+	preferences:		Change the configuration of Heroes of Thargos card creator
 	
 	#cards:
 	previous card:		Selects the previous card in the list
@@ -638,10 +636,10 @@ button:
 
 ############################################################## Titles in the GUI
 title:
-	magic set editor:	Magic Set Editor
-	%s - magic set editor:	%s - Magic Set Editor
+	magic set editor:	Heroes of Thargos card creator
+	%s - magic set editor:	%s - Heroes of Thargos card creator
 	untitled:			Untitled
-	about:				About Magic Set Editor
+	about:				About Heroes of Thargos card creator
 	symbol editor:		Symbol Editor
 	# dialogs
 	new set:			New Set
@@ -786,10 +784,10 @@ error:
 	aborting parsing:									Fatal errors encountered, aborting reading.
 	newer version:
 		%s
-		This file is made with a newer version of Magic Set Editor (%s)
+		This file is made with a newer version of the Heroes of Thargos card creator (%s)
 		When you open it, some aspects of the file may be lost.
 		It is recommended that you upgrade to the latest version.
-		Visit http:://magicseteditor.sourceforge.net/
+		Visit http:://github.com/twanvl/HeroesOfThargosSetEditor/
 	word list type not found:			The word list type "%s" was not found (from a <word-list> tag)
 	pack type not found:				The pack type "%s" was not found (from a pack type)
 	
@@ -879,68 +877,4 @@ type:
 	
 	point:			point
 	points:			points
-
-############################################################## Magic
-package:
-	magic.mse-game:
-		# Card fields
-		name:		Name
-		cc:			CC
-		type:		Type
-		p/t:		P/T
-		rarity:		Rarity
-		card name:	Card Name
-		
-		# Set info
-		
-		# descriptions/help text
-
-	magic-mana-*.mse-symbol-font:
-		# note: reminder/shortcut must start with a space, otherwise it is used as a shortcut
-		#       so typing T *anywhere* would insert a symbol (which would be bad)
-		menu item T:			&Tap symbol	 T
-		menu item Q:			&Untap symbol	 Q
-		menu item W:			&White mana	 W
-		menu item U:			Bl&ue mana	 U
-		menu item B:			&Black mana	 B
-		menu item R:			&Red mana	 R
-		menu item G:			&Green mana	 G
-		menu item S:			&Snow mana	 S
-		menu item X:			Variable mana &X	 X
-		menu item Y:			Variable mana &Y	 Y
-		menu item Z:			Variable mana &Z	 Z
-		menu item I:			&Infinite mana	I
-		menu item colorless:	&Colorless mana...
-		title colorless:		Colorless mana
-		message colorless:		Enter amount of colorless mana:
-		menu item half:				&Half mana
-		menu item |W:				&White	 |W
-		menu item |U:				Bl&ue	 |U
-		menu item |B:				&Black	 |B
-		menu item |R:				&Red	 |R
-		menu item |G:				&Green	 |G
-		menu item |S:				&Snow	 |S
-		menu item 1/2:				&Colorless	1/2
-		menu item hybrid:		H&ybrid mana (two color)
-		menu item W/U:				White/Blue mana	 W/U
-		menu item U/B:				Blue/Black mana	 U/B
-		menu item B/R:				Black/Red mana	 B/R
-		menu item R/G:				Red/Green mana	 R/G
-		menu item G/W:				Green/White mana	 G/W
-		menu item W/B:				White/Black mana	 W/B
-		menu item U/R:				Blue/Red mana	 U/R
-		menu item B/G:				Black/Green mana	 B/G
-		menu item R/W:				Red/White mana	 R/W
-		menu item G/U:				Green/Blue mana	 G/U
-		menu item hybrid 3:		H&ybrid mana (three color)
-		menu item W/U/B:			White/Blue/Black mana	 W/U/B
-		menu item U/B/R:			Blue/Black/Red mana	 U/B/R
-		menu item B/R/G:			Black/Red/Green mana	 B/R/G
-		menu item R/G/W:			Red/Green/White mana	 R/G/W
-		menu item G/W/U:			Green/White/Blue mana	 G/W/U
-		menu item W/B/R:			White/Black/Red mana	 W/B/R
-		menu item U/R/G:			Blue/Red/Green mana	 U/R/G
-		menu item B/G/W:			Black/Green/White mana	 B/G/W
-		menu item R/W/U:			Red/White/Blue mana	 R/W/U
-		menu item G/U/B:			Green/Blue/Black mana	 G/U/B
 

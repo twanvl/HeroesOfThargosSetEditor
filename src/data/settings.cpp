@@ -172,14 +172,16 @@ Settings::Settings()
   , symbol_grid          (true)
   , symbol_grid_snap     (false)
   , print_layout         (LAYOUT_NO_SPACE)
+#if 0
   #if USE_OLD_STYLE_UPDATE_CHECKER
-  , updates_url          (_("http://magicseteditor.sourceforge.net/updates"))
+  , updates_url          ()
   #endif
-  , package_versions_url (_("http://magicseteditor.sourceforge.net/packages"))
-  , installer_list_url   (_("http://magicseteditor.sourceforge.net/installers"))
+  , package_versions_url ()
+  , installer_list_url   ()
   , check_updates        (CHECK_IF_CONNECTED)
   , check_updates_all    (true)
-  , website_url          (_("http://magicseteditor.sourceforge.net/"))
+  , website_url          ()
+#endif
   , install_type         (INSTALL_DEFAULT)
 {}
 
@@ -258,17 +260,16 @@ IMPLEMENT_REFLECTION_NO_SCRIPT(Settings) {
   REFLECT(default_game);
   REFLECT(print_layout);
   REFLECT(apprentice_location);
+#if 0
   #if USE_OLD_STYLE_UPDATE_CHECKER
     REFLECT(updates_url);
-  #else
-    REFLECT_COMPAT_IGNORE(<306,"updates_url",String);
   #endif
   REFLECT(package_versions_url);
   REFLECT(installer_list_url);
   REFLECT(check_updates);
   REFLECT(check_updates_all);
+#endif
   REFLECT(install_type);
-  REFLECT(website_url);
   REFLECT(game_settings);
   REFLECT(stylesheet_settings);
   REFLECT(default_stylesheet_settings);

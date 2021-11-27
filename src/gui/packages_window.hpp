@@ -6,6 +6,7 @@
 
 #pragma once
 
+#if USE_PACKAGE_MANAGER
 // ----------------------------------------------------------------------------- : Includes
 
 #include <util/prec.hpp>
@@ -52,3 +53,4 @@ private:
   bool checkInstallerList(bool refresh = true);
 };
 
+#endif

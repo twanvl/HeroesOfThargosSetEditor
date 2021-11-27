@@ -20,9 +20,12 @@
 // ----------------------------------------------------------------------------- : NewSetWindow
 
 SetP new_set_window(Window* parent) {
-  NewSetWindow wnd(parent);
-  wnd.ShowModal();
-  return wnd.set;
+  // Always use the same game + style, instead of showing the "new set window"
+  auto game = Game::byName("heroesofthargos");
+  auto stylesheet = StyleSheet::byGameAndName(*game, "standard");
+  auto set = make_intrusive<Set>(stylesheet);
+  set->validate();
+  return set;
 }
 
 NewSetWindow::NewSetWindow(Window* parent)

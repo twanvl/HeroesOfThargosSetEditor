@@ -5,6 +5,7 @@
 //+----------------------------------------------------------------------------+
 
 // ----------------------------------------------------------------------------- : Includes
+#if USE_PACKAGE_MANAGER
 
 #include <util/prec.hpp>
 #include <gui/packages_window.hpp>
@@ -438,3 +439,5 @@ BEGIN_EVENT_TABLE(PackagesWindow, wxDialog)
   EVT_UPDATE_UI(wxID_ANY, PackagesWindow::onUpdateUI)
   EVT_IDLE  (             PackagesWindow::onIdle)
 END_EVENT_TABLE()
+
+#endif

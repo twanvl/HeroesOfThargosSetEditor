@@ -116,11 +116,13 @@ void WelcomeWindow::onOpenLast(wxCommandEvent&) {
   }
 }
 
+#if USE_UPDATE_CHECKER
 void WelcomeWindow::onCheckUpdates(wxCommandEvent&) {
   Show(false); // hide, so the PackagesWindow will not use this window as its parent
   (new PackagesWindow(nullptr))->Show();
   Close();
 }
+#endif
 
 void WelcomeWindow::close(const SetP& set) {
   if (!set) return;
@@ -133,7 +135,9 @@ BEGIN_EVENT_TABLE(WelcomeWindow, wxFrame)
   EVT_BUTTON         (ID_FILE_NEW,           WelcomeWindow::onNewSet)
   EVT_BUTTON         (ID_FILE_OPEN,          WelcomeWindow::onOpenSet)
   EVT_BUTTON         (ID_FILE_RECENT,        WelcomeWindow::onOpenLast)
+#if USE_UPDATE_CHECKER
   EVT_BUTTON         (ID_FILE_CHECK_UPDATES, WelcomeWindow::onCheckUpdates)
+#endif
   EVT_PAINT          (                       WelcomeWindow::onPaint)
 //  EVT_IDLE           (                       WelcomeWindow::onIdle)
 END_EVENT_TABLE  ()

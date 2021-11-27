@@ -17,8 +17,6 @@ vector<FileFormatP> file_formats;
 
 void init_file_formats() {
   file_formats.push_back(mse2_file_format());
-  file_formats.push_back(mse1_file_format());
-  file_formats.push_back(mtg_editor_file_format());
 }
 
 String import_formats() {

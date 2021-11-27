@@ -203,10 +203,10 @@ FILETYPE VFT_APP
     {
       VALUE "FileVersion",     MSE_VERSION_STRING
       VALUE "License",         "GNU General Public License 2 or later; This is free software, and you are welcome to redistribute it under certain conditions; See the help file for details"
-      VALUE "FileDescription", "Magic Set Editor"
-      VALUE "InternalName",    "magicseteditor"
+      VALUE "FileDescription", "Heroes of Thargos card creator"
+      VALUE "InternalName",    "Heroes of Thargos card creator"
       VALUE "LegalCopyright",  "(c) The Magic Set Editor development team"
-      VALUE "ProductName",     "Magic Set Editor"
+      VALUE "ProductName",     "Heroes of Thargos card creator"
     }
   }
 }

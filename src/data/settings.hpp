@@ -193,6 +193,7 @@ public:
   String apprentice_location;
   
   // --------------------------------------------------- : Update checking
+#if 0
   #if USE_OLD_STYLE_UPDATE_CHECKER
     String updates_url;
   #endif
@@ -200,7 +201,7 @@ public:
   String installer_list_url;   ///< available installers
   CheckUpdates check_updates;
   bool   check_updates_all; ///< Check updates of all packages, not just the program
-  String website_url;
+#endif
   
   // --------------------------------------------------- : Installation settings
   InstallType install_type;

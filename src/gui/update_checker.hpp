@@ -10,6 +10,7 @@
 
 #include <util/prec.hpp>
 
+#if 0
 // ----------------------------------------------------------------------------- : Update checking
 
 // Checks for updates if the settings say so
@@ -30,3 +31,4 @@ bool update_data_found();
 /// Is there an update?
 bool update_available();
 
+#endif

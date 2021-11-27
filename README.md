@@ -1,8 +1,8 @@
-# Magic Set Editor 2
+# Heroes of Thargos card creator
 
-Magic Set Editor, or MSE for short, is a program with which you can design your own cards for popular trading card games. MSE can then generate images of those cards that you can print or upload to the internet. Magic Set Editor also has a statistics window that will give useful information about your set, like the average mana cost, number of rares, etc. When you have finished your set, you can export it to an HTML file to use on the Internet, or to Apprentice or CCG Lackey so you can play with your cards online.
+This is a fork of *Magic Set Editor*, reskinned for the Cursed Empire: Heroes of Thargos card game.
 
-More information on https://magicseteditor.boards.net/
+If you are looking for a general program, see https://github.com/twanvl/MagicSetEditor2
 
 ## Dependencies
 
@@ -27,7 +27,7 @@ vcpkg install boost-pool
 vcpkg install hunspell
 vcpkg integrate install
 ````
- * Then just use "Open Folder" from inside visual studio to open the Magic Set Editor source code root folder.
+ * Then just use "Open Folder" from inside visual studio to open the Thargos Set Editor source code root folder.
  * Select the configuration that you want to build, and hit F7.
 
 Notes:
@@ -90,5 +90,15 @@ Finally, copy the resources to a SharedSupport directory and run the executable
 ````
 mkdir SharedSupport && cd SharedSupport
 cp -r ../resource SharedSupport/
-./magicseteditor
+./thargosseteditor
 ````
+
+## Differences compared to Magic Set Editor
+
+The following things have been changed
+ * Changed name of the executable and local storage directories
+ * Changed program title (via locale file)
+ * "new set" always uses the heroesofthargos-standard style, instead of presenting a window
+ * Removed Magic specific import and export options
+ * Removed update checker
+ 

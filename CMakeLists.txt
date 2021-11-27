@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(magicseteditor VERSION 2.1.2)
+project(heroes-of-thargos-card-creator VERSION 2.1.2)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -29,34 +29,23 @@ include(${wxWidgets_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${HUNSPELL_INCLUDE_DIRS})
 
-# Magic Set Editor executable
+# Heroes of Thargos Card Creator executable
 
-add_executable(magicseteditor WIN32)
+add_executable(heroes-of-thargos-card-creator WIN32)
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${HUNSPELL_LIBRARIES})
 
 file(GLOB_RECURSE sources src/*.cpp)
 list(FILTER sources EXCLUDE REGEX win32_cli_wrapper.cpp)
-target_sources(magicseteditor PRIVATE ${sources})
-target_precompile_headers(magicseteditor PRIVATE src/util/prec.hpp)
+target_sources(heroes-of-thargos-card-creator PRIVATE ${sources})
+target_precompile_headers(heroes-of-thargos-card-creator PRIVATE src/util/prec.hpp)
 
 configure_file(src/config.hpp.in src/config.hpp)
 
 # resource file
 
-target_sources(magicseteditor PRIVATE resource/win32_res.rc)
-
-# magicseteditor.com: wrapper to enable command line executable on windows
-
-if(WIN32)
-  add_executable(magicseteditor-cli)
-  target_sources(magicseteditor-cli PRIVATE src/cli/win32_cli_wrapper.cpp)
-  add_custom_command(TARGET magicseteditor-cli POST_BUILD COMMAND
-    ${CMAKE_COMMAND} -E copy "${PROJECT_BINARY_DIR}/magicseteditor-cli.exe" "${PROJECT_BINARY_DIR}/magicseteditor.com"
-  )
-endif()
-
+target_sources(heroes-of-thargos-card-creator PRIVATE resource/win32_res.rc)
 
 # warnings
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)

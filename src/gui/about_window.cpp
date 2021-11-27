@@ -12,6 +12,10 @@
 #include <util/version.hpp>
 #include <wx/dcbuffer.h>
 
+// ----------------------------------------------------------------------------- : Colors etc.
+
+wxColor about_bg_color(240,247,255);
+
 // ----------------------------------------------------------------------------- : About window
 
 AboutWindow::AboutWindow(Window* parent)
@@ -39,7 +43,7 @@ void AboutWindow::draw(DC& dc) {
   wxSize ws = GetClientSize();
   // draw background
   dc.SetPen  (*wxTRANSPARENT_PEN);
-  dc.SetBrush(wxColor(240,247,255));
+  dc.SetBrush(about_bg_color);
   dc.DrawRectangle(0, 0, ws.GetWidth(), ws.GetHeight());
   // draw logo
   dc.DrawBitmap(logo,  (ws.GetWidth() -  logo.GetWidth()) / 2, 5);
@@ -57,6 +61,8 @@ void AboutWindow::draw(DC& dc) {
     y += 18;
     dc.DrawText(name, x + 20, y);
   }
+  y += 18;
+  dc.DrawText(_("This program is based on Magic Set Editor"), x, y);
 }
 
 BEGIN_EVENT_TABLE(AboutWindow, wxDialog)

@@ -62,7 +62,9 @@ SetWindow::SetWindow(Window* parent, const SetP& set)
     add_menu_item_tr(menuFile, ID_FILE_SAVE_AS_DIRECTORY, nullptr, "save_set_as_directory");
     add_menu_item_tr(menuFile, wxID_ANY, "export", "export", wxITEM_NORMAL, makeExportMenu());
     menuFile->AppendSeparator();
+    #if USE_UPDATE_CHECKER
     add_menu_item_tr(menuFile, ID_FILE_CHECK_UPDATES, nullptr, "check_updates");
+    #endif
     #if USE_SCRIPT_PROFILING
     add_menu_item_tr(menuFile, ID_FILE_PROFILER, nullptr, "show_profiler");
     #endif
@@ -185,8 +187,10 @@ wxMenu* SetWindow::makeExportMenu() {
   add_menu_item_tr(menuExport, ID_FILE_EXPORT_HTML, "export_html", "export_html");
   add_menu_item_tr(menuExport, ID_FILE_EXPORT_IMAGE, "export_image", "export_image");
   add_menu_item_tr(menuExport, ID_FILE_EXPORT_IMAGES, "export_images", "export_images");
+  #if false // these only make sense for mtg
   add_menu_item_tr(menuExport, ID_FILE_EXPORT_APPR, "export_apprentice", "export_apprentice");
   add_menu_item_tr(menuExport, ID_FILE_EXPORT_MWS, "export_mws", "export_mws");
+  #endif
   return menuExport;
 }
 
@@ -687,11 +691,13 @@ void SetWindow::onFileExportMWS(wxCommandEvent&) {
   export_mws(this, set);
 }
 
+#if USE_UPDATE_CHECKER
 void SetWindow::onFileCheckUpdates(wxCommandEvent&) {
   if (!askSaveAndContinue()) return;
   (new PackagesWindow(this))->Show();
   //Destroy();
 }
+#endif
 
 #if USE_SCRIPT_PROFILING
   void show_profiler_window(wxWindow* parent);
@@ -828,7 +834,7 @@ void SetWindow::onHelpIndex(wxCommandEvent&) {
 }
 
 void SetWindow::onHelpWebsite(wxCommandEvent&) {
-  wxLaunchDefaultBrowser(settings.website_url);
+  wxLaunchDefaultBrowser(_("https://github.com/twanvl/HeroesOfThargosSetEditor"));
 }
 
 void SetWindow::onHelpAbout(wxCommandEvent&) {
@@ -849,7 +855,9 @@ void SetWindow::onMenuOpen(wxMenuEvent& ev) {
 
 void SetWindow::onIdle(wxIdleEvent& ev) {
   // Stuff that must be done in the main thread
+#if USE_UPDATE_CHECKER
   show_update_dialog(this);
+#endif
 }
 
 // ----------------------------------------------------------------------------- : Event table
@@ -866,7 +874,9 @@ BEGIN_EVENT_TABLE(SetWindow, wxFrame)
   EVT_MENU      (ID_FILE_EXPORT_HTML,  SetWindow::onFileExportHTML)
   EVT_MENU      (ID_FILE_EXPORT_APPR,  SetWindow::onFileExportApprentice)
   EVT_MENU      (ID_FILE_EXPORT_MWS,  SetWindow::onFileExportMWS)
+#if USE_UPDATE_CHECKER
   EVT_MENU      (ID_FILE_CHECK_UPDATES,  SetWindow::onFileCheckUpdates)
+#endif
 #if USE_SCRIPT_PROFILING
   EVT_MENU      (ID_FILE_PROFILER,    SetWindow::onFileProfiler)
 #endif

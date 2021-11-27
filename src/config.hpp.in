@@ -6,10 +6,10 @@
 
 #pragma once
 
-#define MSE_VERSION_MAJOR @magicseteditor_VERSION_MAJOR@
-#define MSE_VERSION_MINOR @magicseteditor_VERSION_MINOR@
-#define MSE_VERSION_PATCH @magicseteditor_VERSION_PATCH@
+#define MSE_VERSION_MAJOR @heroes-of-thargos-card-creator_VERSION_MAJOR@
+#define MSE_VERSION_MINOR @heroes-of-thargos-card-creator_VERSION_MINOR@
+#define MSE_VERSION_PATCH @heroes-of-thargos-card-creator_VERSION_PATCH@
 
 // version number for .rc file
-#define MSE_VERSION_RESOURCE @magicseteditor_VERSION_MAJOR@,@magicseteditor_VERSION_MINOR@,@magicseteditor_VERSION_PATCH@,0
-#define MSE_VERSION_STRING "@magicseteditor_VERSION_MAJOR@.@magicseteditor_VERSION_MINOR@.@magicseteditor_VERSION_PATCH@"
+#define MSE_VERSION_RESOURCE @heroes-of-thargos-card-creator_VERSION_MAJOR@,@heroes-of-thargos-card-creator_VERSION_MINOR@,@heroes-of-thargos-card-creator_VERSION_PATCH@,0
+#define MSE_VERSION_STRING "@heroes-of-thargos-card-creator_VERSION_MAJOR@.@heroes-of-thargos-card-creator_VERSION_MINOR@.@heroes-of-thargos-card-creator_VERSION_PATCH@"

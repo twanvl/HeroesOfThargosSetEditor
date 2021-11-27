@@ -84,6 +84,7 @@ private:
   void onApprenticeBrowse(wxCommandEvent&);
 };
 
+#if 0
 // Preferences page for automatic updates
 class UpdatePreferencesPage : public PreferencesPage {
 public:
@@ -98,6 +99,7 @@ private:
   // check for updates
   void onCheckUpdatesNow(wxCommandEvent&);
 };
+#endif
 
 
 // ----------------------------------------------------------------------------- : PreferencesWindow
@@ -110,7 +112,9 @@ PreferencesWindow::PreferencesWindow(Window* parent)
   nb->AddPage(new GlobalPreferencesPage (nb), _TITLE_("global"));
   nb->AddPage(new DisplayPreferencesPage(nb), _TITLE_("display"));
   nb->AddPage(new DirsPreferencesPage   (nb), _TITLE_("directories"));
+#if 0
   nb->AddPage(new UpdatePreferencesPage (nb), _TITLE_("updates"));
+#endif
   
   // init sizer
   wxSizer* s = new wxBoxSizer(wxVERTICAL);
@@ -332,6 +336,7 @@ END_EVENT_TABLE  ();
 
 
 // ----------------------------------------------------------------------------- : Preferences page : updates
+#if 0
 
 UpdatePreferencesPage::UpdatePreferencesPage(Window* parent)
   : PreferencesPage(parent)
@@ -374,3 +379,4 @@ void UpdatePreferencesPage::onCheckUpdatesNow(wxCommandEvent&) {
 BEGIN_EVENT_TABLE(UpdatePreferencesPage, wxPanel)
   EVT_BUTTON      (ID_CHECK_UPDATES_NOW, UpdatePreferencesPage::onCheckUpdatesNow)
 END_EVENT_TABLE  ()
+#endif

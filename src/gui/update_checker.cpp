@@ -19,6 +19,8 @@
 #include <wx/dialup.h>
 #include <wx/url.h>
 
+#if 0
+
 DECLARE_POINTER_TYPE(VersionData);
 
 // ----------------------------------------------------------------------------- : Update data
@@ -200,3 +202,5 @@ void show_update_dialog(Window* parent) {
 }
 
 #endif // !USE_OLD_STYLE_UPDATE_CHECKER
+
+#endif

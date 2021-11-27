@@ -601,7 +601,7 @@ bool set_package_action(InstallablePackages& packages, const InstallablePackageP
 
 // ----------------------------------------------------------------------------- : MSE package
 
-String mse_package = _("magicseteditor.exe");
+String mse_package = _("heroes-of-thargos-card-creator.exe");
 
 InstallablePackageP mse_installable_package() {
   PackageVersionP mse_version(new PackageVersion(

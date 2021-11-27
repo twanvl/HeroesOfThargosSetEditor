@@ -81,10 +81,10 @@ void nag_about_ascii_version() {
 int MSE::OnRun() {
   try {
     #ifdef __WXMSW__
-      SetAppName(_("Magic Set Editor"));
+      SetAppName(_("Heroes of Thargos card creator"));
     #else
       // Platform friendly appname
-      SetAppName(_("magicseteditor"));
+      SetAppName(_("heroes-of-thargos-card-creator"));
     #endif
     wxInitAllImageHandlers();
     wxFileSystem::AddHandler(new wxInternetFSHandler); // needed for update checker
@@ -119,6 +119,7 @@ int MSE::OnRun() {
           Window* wnd = new SetWindow(nullptr, import_set(arg));
           wnd->Show();
           return runGUI();
+#if USE_PACKAGE_MANAGER
         } else if (f.GetExt() == _("mse-installer")) {
           // Installer; install it
           InstallType type = settings.install_type;
@@ -131,6 +132,7 @@ int MSE::OnRun() {
           PackagesWindow wnd(nullptr, installer);
           wnd.ShowModal();
           return EXIT_SUCCESS;
+#endif
         } else if (f.GetExt() == _("mse-script")) {
           // Run a script file
           if (!run_script_file(arg)) return EXIT_FAILURE;
@@ -156,7 +158,7 @@ int MSE::OnRun() {
           return EXIT_SUCCESS;
         } else if (arg == _("--help") || arg == _("-?")) {
           // command line help
-          cli << _("Magic Set Editor\n\n");
+          cli << _("Heroes of Thargos card creator\n\n");
           cli << _("Usage: ") << BRIGHT << argv[0] << NORMAL << _(" [") << PARAM << _("OPTIONS") << NORMAL << _("]");
           cli << _("\n\n  no options");
           cli << _("\n         \tStart the MSE user interface showing the welcome window.");
@@ -210,7 +212,7 @@ int MSE::OnRun() {
           return EXIT_SUCCESS;
         } else if (arg == _("--version") || arg == _("-v") || arg == _("-V")) {
           // dump version
-          cli << _("Magic Set Editor\n");
+          cli << _("Heroes of Thargos card creator\n");
           cli << _("Version ") << app_version.toString() << version_suffix << ENDL;
           cli.flush();
           return EXIT_SUCCESS;
@@ -284,7 +286,9 @@ int MSE::OnRun() {
 }
 
 int MSE::runGUI() {
+#if USE_UPDATE_CHECKER
   check_updates();
+#endif
   return wxApp::OnRun();
 }
 
